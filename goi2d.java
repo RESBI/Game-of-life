@@ -3,12 +3,13 @@ import java.util.Random;
 public class goi2d {
     public static void main(String[] args) {       
         System.out.print("\033[99m");
-	int H = 40;
-	int W = 40;
+	int H = 30;
+	int W = 30;
 	int Count = 0;
 	int AX, AY, POINT;
 	int[][] Gird = new int[H][W];
 	int[][] Temp = new int[H][W];
+        String Line;
   
 	int i, j, k, l, a, b; //Set values for "for".
 
@@ -51,16 +52,19 @@ public class goi2d {
 	    }
 	    //Flush the map then draw to screen and empty the temp.
 	    for (a = 0; a < H; a++) {
+		Line = "";
 		for (b = 0; b < W; b++) {
 		    Gird[a][b] = Temp[a][b];
 		    Temp[a][b] = 0;
 		    if (Gird[a][b] == 1) {
-			System.out.print("# ");
+			//System.out.print("# ");
+			Line += "# ";
 		    } else {
-			System.out.print("  ");
+			//System.out.print("  ");
+			Line += "  ";
 		    }
 		}
-		System.out.print("\n");
+		System.out.print(Line + "\n");
 	    }
 	}
     }

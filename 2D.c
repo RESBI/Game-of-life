@@ -2,8 +2,8 @@
 
 void main(){
   printf("\033[99m"); //Set color.
-  int H = 150;
-  int W = 300;
+  int H = 30;
+  int W = 30;
   int Count = 0;
   int AX;
   int AY;

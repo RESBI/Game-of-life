@@ -49,8 +49,8 @@ def Draw(Gird, H, W):
 os.system("clear") # On Linux
 #os.system("cls") # On Windows
 print("\033[1;99m Game of Life!")
-W = 20
-H = 20
+W = 30
+H = 30
 Templ = GetGird(H, W)
 Lifes = GetGird(H, W)
 Lifes = GetRandom(H, W, Lifes)

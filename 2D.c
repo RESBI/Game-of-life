@@ -2,23 +2,21 @@
 #include <time.h>
 
 void main(){
-  system("clear"); // For Linux.
-  //system("cls"); // For Windows.
+  system("clear");
   printf("\033[99m"); //Set color.
   int H = 30;
-  int W = 30;
+  int W = 60;
   int Count = 0;
-  int AX;
-  int AY;
-  int POINT;
+  int AX, AY, POINT;
   int Gird[H][W];
   int Temp[H][W];
-
+  
+  int i, j, k, l, a, b; //Set values for "for".
+  
   srand(time(NULL));
-  for(int a = 0; a < H; a++){
-    for(int b = 0; b < W; b++){
+  for(a = 0; a < H; a++){
+    for(b = 0; b < W; b++){
       Gird[a][b] = rand() % 2; //Generate random point.
-      Temp[a][b] = 0;
     }
   }
   /*
@@ -34,30 +32,19 @@ void main(){
   */
   while(1){
     printf("\x1b[0;0H");
-    //Draw
-    for(int a = 0; a < H; a++){
-      for(int b = 0; b < W; b++){
-	if(Gird[a][b] == 1){
-	  printf("# ");
-        }else{
-	  printf("  ");
-	}
-      }
-      printf("\n");
-    }    
     //Generate new map.
-    for(int a = 0; a < H; a++){
-      for(int b = 0; b < W; b++){
+    for(a = 0; a < H; a++){
+      for(b = 0; b < W; b++){
 	//Get neighbour.
 	Count = 0;
-	for(int i = -1; i < 2; i++){
-	  for(int j = -1; j < 2; j ++){
+	for(i = -1; i < 2; i++){
+	  AY = (a + i + H) % H;
+	  for(j = -1; j < 2; j ++){
 	    AX = (b + j + W) % W;
-	    AY = (a + i + H) % H;
-	    Count = Count + Gird[AY][AX];
+	    Count += Gird[AY][AX];
 	  }
 	}
-	Count = Count - Gird[a][b];
+	Count -= Gird[a][b];
 	//Get new point.
 	POINT = Gird[a][b];
 	if(POINT == 1 && (Count < 2 || Count > 3)){
@@ -69,12 +56,18 @@ void main(){
 	}
       }
     }
-    //Flush the map and empty the temp.
-    for(int a = 0; a < H; a++){
-      for(int b = 0; b < W; b++){
+    //Flush the map then draw to screen and empty the temp.
+    for(a = 0; a < H; a++){
+      for(b = 0; b < W; b++){
 	Gird[a][b] = Temp[a][b];
 	Temp[a][b] = 0;
+	if(Gird[a][b]){
+	  printf("# ");
+        }else{
+	  printf("  ");
+	}
       }
-    } 
+      printf("\n");
+    }
   }
 }

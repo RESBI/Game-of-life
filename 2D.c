@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <time.h>
 
 void main(){
+  system("clear"); // For Linux.
+  //system("cls"); // For Windows.
   printf("\033[99m"); //Set color.
   int H = 30;
   int W = 30;
@@ -10,12 +13,15 @@ void main(){
   int POINT;
   int Gird[H][W];
   int Temp[H][W];
+
+  srand(time(NULL));
   for(int a = 0; a < H; a++){
     for(int b = 0; b < W; b++){
-      Gird[a][b] = 0;
+      Gird[a][b] = rand() % 2; //Generate random point.
       Temp[a][b] = 0;
     }
   }
+  /*
   for(int k = 3; k < W; k=k+6){  //Generate many flight.
     for(int l = 2; l < H; l=l+5){
       Gird[l][k] = 1;
@@ -25,6 +31,7 @@ void main(){
       Gird[l+2][k+1] = 1;
     }
   }
+  */
   while(1){
     printf("\x1b[0;0H");
     //Draw

@@ -10,7 +10,6 @@ public class goi2d {
 	int[][] Gird = new int[H][W];
 	int[][] Temp = new int[H][W];
         String Line;
-  
 	int i, j, k, l, a, b; //Set values for "for".
 
 	for (a = 0; a < H; a++) {
@@ -18,17 +17,11 @@ public class goi2d {
 		Gird[a][b] = new Random().nextInt(2); //Generate random point.
 	    }
 	}
-	/*
-	  Frame Window = new Frame();
-	  Window.setLocation(200, 100);
-	  Window.setSize(W, H);
-	  Window.setTitle("Game of life!");
-	  Window.setVisible(true);
-	*/
 	while (1 == 1) {
             System.out.print("\033[0;0H");
 	    //Generate new map.
 	    for (a = 0; a < H; a++) {
+		Line = "";
 		for (b = 0; b < W; b++) {
 		    POINT = Gird[a][b];
 		    //Get neighbour.
@@ -48,23 +41,21 @@ public class goi2d {
 		    } else {
 			Temp[a][b] = POINT;
 		    }
-		}
-	    }
-	    //Flush the map then draw to screen and empty the temp.
-	    for (a = 0; a < H; a++) {
-		Line = "";
-		for (b = 0; b < W; b++) {
-		    Gird[a][b] = Temp[a][b];
-		    Temp[a][b] = 0;
+		    //Draw to screen.
 		    if (Gird[a][b] == 1) {
-			//System.out.print("# ");
 			Line += "# ";
 		    } else {
-			//System.out.print("  ");
 			Line += "  ";
 		    }
 		}
-		System.out.print(Line + "\n");
+		System.out.println(Line);
+	    }
+	    //Flush the map and empty the temp.
+	    for (a = 0; a < H; a++) {
+		for (b = 0; b < W; b++) {
+		    Gird[a][b] = Temp[a][b];
+		    Temp[a][b] = 0;
+		}
 	    }
 	}
     }

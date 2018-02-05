@@ -1,9 +1,12 @@
 # Game-of-life
 It have three version,
 
-C, Python and Java,
+C (, Arduino), Python and Java,
 
 I wrote for fun. :)
+
+# Tips:
+Arduino version use ssd3306 LCD,or you can change it to other support.
 
 # Result:
 After about 4 hour of I start to wrote java version,

@@ -10,7 +10,6 @@ void main(){
   int AX, AY, POINT;
   int Gird[H][W];
   int Temp[H][W];
-  
   int i, j, k, l, a, b; //Set values for "for".
   
   srand(time(NULL));
@@ -31,12 +30,13 @@ void main(){
   }
   */
   while (1) {
-    printf ("\x1b[0;0H");
+    printf("\x1b[0;0H");
     //Generate new map.
     for (a = 0; a < H; a++) {
       for (b = 0; b < W; b++) {
+	POINT = Gird[a][b];
 	//Get neighbour.
-	Count = 0;
+	Count = - POINT;
 	for (i = -1; i < 2; i++) {
 	  AY = (a + i + H) % H;
 	  for (j = -1; j < 2; j ++) {
@@ -44,23 +44,15 @@ void main(){
 	    Count += Gird[AY][AX];
 	  }
 	}
-	Count -= Gird[a][b];
 	//Get new point.
-	POINT = Gird[a][b];
-	if (POINT == 1 && (Count < 2 || Count > 3)) {
+	if (POINT && (Count < 2 || Count > 3)) {
 	  Temp[a][b] = 0;
-	} else if (POINT == 0 && Count == 3){
+	} else if (!POINT && Count == 3){
 	  Temp[a][b] = 1;
 	} else {
 	  Temp[a][b] = POINT;
 	}
-      }
-    }
-    //Flush the map then draw to screen and empty the temp.
-    for (a = 0; a < H; a++) {
-      for (b = 0; b < W; b++) {
-	Gird[a][b] = Temp[a][b];
-	Temp[a][b] = 0;
+	//Draw to screen.
 	if (Gird[a][b]) {
 	  printf("# ");
         } else {
@@ -68,6 +60,13 @@ void main(){
 	}
       }
       printf("\n");
+    }
+    //Flush the map and empty the temp.
+    for (a = 0; a < H; a++) {
+      for (b = 0; b < W; b++) {
+	Gird[a][b] = Temp[a][b];
+	Temp[a][b] = 0;
+      }
     }
   }
 }
